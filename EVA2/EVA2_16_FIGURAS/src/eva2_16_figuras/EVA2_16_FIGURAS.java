@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package eva2_16_figuras;
 
 /**
@@ -14,19 +15,33 @@ public class EVA2_16_FIGURAS {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         // TODO code application logic here
         Triangulo triangulo = new Triangulo(10,15);
         Circulo circulo = new Circulo (10);
         Rectangulo rectangulo = new Rectangulo(19,15);
         //System.out.println("Area de un triangulo " + triangulo.calcularArea());
+        
+        imprimirArea(triangulo);//llamada a funcion 
+        imprimirArea(circulo);
+        imprimirArea(rectangulo);
         imprimirArea(triangulo);
+        
     }
     
      public static void imprimirArea(Figura f){
          System.out.println("Area = " + f.calcularArea());
+         //RESTAURAR EL OBJETO:
+         //CONVERTIR UN TIPO DE DATO EN OTRO --> CASTING
+         if(f instanceof Triangulo){
+             System.out.println(f.getClass());
+         Triangulo trian = (Triangulo)f;//conviritendo una figura en un triangulo 
+         }
      }
-    
+     
+     public static void claseObject(Object o){
+         System.out.println(o.getClass());
+     }
 }
 
 class Rectangulo extends Figura{

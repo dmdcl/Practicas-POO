@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package eva2_15_polimorfismo;
 
 /**
@@ -21,6 +22,7 @@ public class EVA2_15_POLIMORFISMO {
         Docente docente = new Docente ("036","Pedro","",50);
         
         Persona persoEstu = estudiante;
+        //Estudiante estuperso = persona;
         
     }
     
