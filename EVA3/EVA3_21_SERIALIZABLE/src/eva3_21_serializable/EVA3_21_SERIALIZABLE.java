@@ -6,10 +6,11 @@
 
 package eva3_21_serializable;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -26,11 +27,13 @@ public class EVA3_21_SERIALIZABLE {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        // TODO code application logic here
         //binarios y de texto
         //ESPECIFICAR QUE OBJETOS (CLASES) SON SERIALIZABLES
         //DEBEMOS HACER QUE LA CLASE IMPLEMENTE LA INTERFAZ SERIALIZABLE
         Persona persona = new Persona("Pedro", "Páramo");
         escribirObj(persona);
+        leerObj();
     }
     
     //GUARDAR OBJETOS
@@ -48,6 +51,21 @@ public class EVA3_21_SERIALIZABLE {
         }
     }
     //LEER OBJETOS
+    public static void leerObj(){
+        try {
+            FileInputStream abrirArch = new FileInputStream("c://ARCHIVOS/ARCHIVO3.obj");
+            ObjectInputStream leerObjeto = new ObjectInputStream(abrirArch);
+            Persona persona = (Persona)leerObjeto.readObject();//OBJETO (Clase Object)
+            System.out.println("Nombre: " + persona.getNombre() + " " + persona.getApellido());
+            leerObjeto.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(EVA3_21_SERIALIZABLE.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(EVA3_21_SERIALIZABLE.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EVA3_21_SERIALIZABLE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
 
@@ -79,3 +97,5 @@ class Persona implements Serializable{
     }
     
 }
+ 
+    
