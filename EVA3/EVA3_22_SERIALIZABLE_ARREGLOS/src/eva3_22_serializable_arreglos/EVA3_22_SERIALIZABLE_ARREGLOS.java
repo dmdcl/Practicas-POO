@@ -1,11 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package eva3_22_serializable_arreglos;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,31 +10,33 @@ import java.util.ArrayList;
 
 /**
  *
- * @author invitado
+ * @author invitado 
  */
 public class EVA3_22_SERIALIZABLE_ARREGLOS {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
         //COLLECTIONS. <TIPOS DE DATOS GENERICOS>
-        ArrayList<Persona> miListaPerso = new ArrayList();
+        ArrayList<Persona> miListaPerso = new ArrayList(); 
+        
         //EN JAVA ---> LISTAS, ARREGLOS, ETC: 0 --> N- 1
-        miListaPerso.add(new Persona ("Juan","Perez"));
-                escribirObj(miListaPerso);
-                leerObj();
-   
+        miListaPerso.add(new Persona("Dirgo",18));
+        miListaPerso.add(new Persona("RGajau",17));
+        miListaPerso.add(new Persona("Topti",18));
+        miListaPerso.add(new Persona("Luisa",18));
+        
+        escribirObjetos(miListaPerso);
+        leerObjetos();
     }
     
-    public static void escribirObj(Object obj) {
+    
+    public static void escribirObjetos(Object obj) {
         try {
-            FileOutputStream abrirArch = new FileOutputStream("c://ARCHIVOS/ARCHIVO3.obj");
-            ObjectOutputStream guardarObj = new ObjectOutputStream(abrirArch);
-            guardarObj.writeObject(obj);
-            guardarObj.flush();
-            guardarObj.close();
+            FileOutputStream openFile = new FileOutputStream("src/archivos/archivo.1");
+            ObjectOutputStream saveObject = new ObjectOutputStream(openFile);
+            saveObject.writeObject(obj);
+            saveObject.flush();
+            saveObject.close();
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -49,16 +44,18 @@ public class EVA3_22_SERIALIZABLE_ARREGLOS {
         }
     }
     
-    public static void leerObj(){
+      public static void leerObjetos() {
+
         try {
-            FileInputStream abrirArch = new FileInputStream("c://ARCHIVOS/ARCHIVO3.obj");
-            ObjectInputStream leerObjeto = new ObjectInputStream(abrirArch);
-            ArrayList<Persona> miListaPerso = (ArrayList<Persona>)leerObjeto.readObject();//OBJETO (Clase Object)
-            for(int i = 0; i < miListaPerso.size(); i++){
-                Persona persona = miListaPerso.get(i);
-                System.out.println("Nombre: " + persona.getNombre() + " " + persona.getApellido());
-            }
-            leerObjeto.close();
+            FileInputStream openFile = new FileInputStream("src/archivos/archivo.1");
+            ObjectInputStream readObject = new ObjectInputStream(openFile);
+            
+            ArrayList<Persona> lista = (ArrayList)readObject.readObject(); //OBJETO (Clase Object)
+            for(int i=0; i<lista.size();i++){
+                System.out.println("Nombre: "+ lista.get(i).getNombre()+" | Edad: "+ lista.get(i).getEdad());
+            } 
+            
+            
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (IOException ex) {
@@ -68,34 +65,36 @@ public class EVA3_22_SERIALIZABLE_ARREGLOS {
         }
     }
 
-    class Persona implements Serializable {
+    
+}
 
-        private String nombre, apellido;
+class Persona implements Serializable {
 
-        public Persona() {
-        }
+    private String nombre;
+    private int edad;
 
-        public Persona(String nombre, String apellido) {
-            this.nombre = nombre;
-            this.apellido = apellido;
-        }
+    public Persona() {
+    }
 
-        public String getNombre() {
-            return nombre;
-        }
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
 
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
-        }
+    public String getNombre() {
+        return nombre;
+    }
 
-        public String getApellido() {
-            return apellido;
-        }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-        public void setApellido(String apellido) {
-            this.apellido = apellido;
-        }
+    public int getEdad() {
+        return edad;
+    }
 
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
 }
